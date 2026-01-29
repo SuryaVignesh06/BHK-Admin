@@ -37,7 +37,7 @@ export default function Sidebar({ isOpen, onClose }) {
         width: '280px',
         background: '#ffffff',
         color: '#1f2937',
-        display: 'flex',
+        // display: 'flex',  <-- REMOVED to let 'hidden lg:flex' control display
         flexDirection: 'column',
         zIndex: 50,
         borderRight: '1px solid #e5e7eb',
@@ -46,13 +46,13 @@ export default function Sidebar({ isOpen, onClose }) {
 
     const mobileStyle = {
         position: 'fixed',
-        top: 0,
+        top: '72px', // Below Topbar
         left: 0,
         bottom: 0,
         width: '280px',
         background: '#ffffff',
         color: '#1f2937',
-        display: 'flex',
+        display: 'flex', // Keeping flex here as 'lg:hidden' handles hiding on desktop
         flexDirection: 'column',
         zIndex: 50,
         borderRight: '1px solid #e5e7eb',

@@ -82,7 +82,7 @@ export default function Dashboard() {
     );
 
     return (
-        <div className="page-container" style={{ padding: '24px', maxWidth: '1600px', margin: '0 auto' }}>
+        <div className="page-container" style={{ padding: '16px', maxWidth: '1600px', margin: '0 auto' }}>
             {/* Header */}
             <div style={{ marginBottom: '24px' }}>
                 <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#111827' }}>
@@ -126,7 +126,7 @@ export default function Dashboard() {
             </div>
 
             {/* Today's Activity */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '24px' }}>
                 {/* Check-ins Today */}
                 <div style={cardStyle}>
                     <div style={cardHeaderStyle}>

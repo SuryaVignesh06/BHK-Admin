@@ -19,10 +19,25 @@ export default function Topbar({ onMenuClick }) {
             justifyContent: 'space-between',
             position: 'sticky',
             top: 0,
-            zIndex: 30
+            zIndex: 60
         }}>
             {/* Left side */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <button
+                    onClick={onMenuClick}
+                    className="lg:hidden"
+                    style={{
+                        padding: '10px',
+                        background: '#f5f5f5',
+                        border: 'none',
+                        borderRadius: '10px',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        marginRight: '8px'
+                    }}
+                >
+                    <Menu size={20} color="#333" />
+                </button>
                 <div>
                     <p style={{ fontSize: '14px', color: '#6b7280', fontWeight: 500 }}>
                         {today}

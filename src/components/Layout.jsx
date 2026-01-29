@@ -32,7 +32,7 @@ export default function Layout() {
                 paddingLeft: isMobile ? 0 : '280px',
                 transition: 'padding-left 0.2s ease'
             }}>
-                <Topbar onMenuClick={() => setSidebarOpen(true)} />
+                <Topbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
 
                 <main style={{
                     flex: 1,
