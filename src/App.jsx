@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import AdminLogin from './pages/AdminLogin';
 import Dashboard from './pages/Dashboard';
@@ -12,7 +12,7 @@ import './index.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Login Route */}
         <Route path="/" element={<AdminLogin />} />
@@ -31,7 +31,7 @@ function App() {
         {/* Catch all - redirect to login */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
