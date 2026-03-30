@@ -26,9 +26,15 @@ export default function AdminLogin() {
         // Simulate login
         await new Promise(resolve => setTimeout(resolve, 800));
 
-        if (email === 'admin@voho.in' && password === 'admin123') {
+        const authorizedEmails = ['admin@voho.in', 'owner@voho.in', 'manager@voho.in'];
+
+        if (authorizedEmails.includes(email) && password === 'admin123') {
+            // Save current user to localStorage
+            localStorage.setItem('currentUser', JSON.stringify({ email }));
             navigate('/dashboard');
-        } else if (email && password) {
+        } else if (email && password && !authorizedEmails.includes(email)) {
+            // Support any other email for demo if password is provided, but mark as guest
+            localStorage.setItem('currentUser', JSON.stringify({ email }));
             navigate('/dashboard');
         } else {
             setError('Invalid credentials');

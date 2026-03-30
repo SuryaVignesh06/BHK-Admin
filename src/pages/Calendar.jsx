@@ -14,24 +14,41 @@ const sampleBookings = [
 ];
 
 export default function Calendar() {
-    // Per-room blocked dates: { roomName: [dateStrings] }
+    // Per-room blocked dates: { roomName: { [dateStr]: { blockedBy: email } } }
     const [blockedDates, setBlockedDates] = useState({
-        'Suite Room': ['2026-02-15', '2026-02-16'],
+        'Suite Room': { '2026-02-15': { blockedBy: 'admin@voho.in' }, '2026-02-16': { blockedBy: 'admin@voho.in' } },
     });
+
+    const getUserEmail = () => {
+        try {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            return user?.email || 'admin@voho.in';
+        } catch (e) {
+            return 'admin@voho.in';
+        }
+    };
 
     const handleToggleAvailability = (roomName, dateStr) => {
         setBlockedDates(prev => {
-            const roomDates = prev[roomName] || [];
-            if (roomDates.includes(dateStr)) {
-                const updated = roomDates.filter(d => d !== dateStr);
+            const roomData = prev[roomName] || {};
+            if (roomData[dateStr]) {
+                const updated = { ...roomData };
+                delete updated[dateStr];
                 return { ...prev, [roomName]: updated };
             } else {
-                return { ...prev, [roomName]: [...roomDates, dateStr] };
+                const email = getUserEmail();
+                return {
+                    ...prev,
+                    [roomName]: {
+                        ...roomData,
+                        [dateStr]: { blockedBy: email }
+                    }
+                };
             }
         });
     };
 
-    const totalBlocked = Object.values(blockedDates).reduce((acc, dates) => acc + dates.length, 0);
+    const totalBlocked = Object.values(blockedDates).reduce((acc, datesObj) => acc + Object.keys(datesObj).length, 0);
 
     const clearAllBlocked = () => setBlockedDates({});
 

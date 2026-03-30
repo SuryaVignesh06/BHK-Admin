@@ -4,15 +4,15 @@ import { Edit2, Save, X, ToggleLeft, ToggleRight, Check } from 'lucide-react';
 const initialApartments = [
     {
         id: 1,
-        name: 'Room 101',
+        name: 'Flat 1',
         price: 3500,
         amenities: ['City View', 'Balcony', 'Premium Finishings', 'King Bed', 'Smart TV', 'AC'],
         available: true,
-        color: '#3b82f6'
+        color: '#D4AF37'
     },
     {
         id: 2,
-        name: 'Room 102',
+        name: 'Flat 2',
         price: 3200,
         amenities: ['Smart Lighting', 'Open Kitchen', 'Parking', 'Queen Bed', 'WiFi', 'AC'],
         available: true,
@@ -20,19 +20,43 @@ const initialApartments = [
     },
     {
         id: 3,
-        name: 'Room 103',
-        price: 3000,
-        amenities: ['Large Living Area', 'Smart TV', 'Laundry', 'Two Beds', 'Kitchen', 'AC'],
+        name: 'Flat 3',
+        price: 8000,
+        amenities: ['Modern Interior', 'Garden View', 'Quiet Area', 'King Bed', 'Smart TV', 'AC'],
+        available: true,
+        color: '#3b82f6'
+    },
+    {
+        id: 4,
+        name: 'Flat 4',
+        price: 8000,
+        amenities: ['Premium Suite', 'City View', 'Luxury Bath', 'King Bed', 'Smart TV', 'AC'],
         available: true,
         color: '#a855f7'
     },
     {
-        id: 4,
-        name: 'Room 104',
-        price: 4000,
+        id: 5,
+        name: 'Suite Room',
+        price: 8000,
         amenities: ['Dedicated Workspace', 'Meeting Area', 'Premium WiFi', 'Mini Bar', 'City View', 'AC'],
         available: true,
         color: '#f97316'
+    },
+    {
+        id: 6,
+        name: 'Deck Room',
+        price: 3000,
+        amenities: ['Outdoor Deck', 'Sunset View', 'Queen Bed', 'WiFi', 'AC'],
+        available: true,
+        color: '#ec4899'
+    },
+    {
+        id: 7,
+        name: 'Open Area',
+        price: 10000,
+        amenities: ['Large Space', 'Event Friendly', 'WiFi', 'Projector Ready'],
+        available: true,
+        color: '#6366f1'
     },
 ];
 

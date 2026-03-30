@@ -4,9 +4,11 @@ import { ChevronLeft, ChevronRight, Lock, X, FileText, Phone, Calendar, User } f
 const apartments = [
     { id: 1, name: 'Flat 1', color: '#D4AF37' },
     { id: 2, name: 'Flat 2', color: '#22c55e' },
-    { id: 3, name: 'Suite Room', color: '#3b82f6' },
-    { id: 4, name: 'Deck Room', color: '#a855f7' },
-    { id: 5, name: 'Open Area', color: '#f97316' },
+    { id: 3, name: 'Flat 3', color: '#3b82f6' },
+    { id: 4, name: 'Flat 4', color: '#a855f7' },
+    { id: 5, name: 'Suite Room', color: '#f97316' },
+    { id: 6, name: 'Deck Room', color: '#ec4899' },
+    { id: 7, name: 'Open Area', color: '#6366f1' },
 ];
 
 const CELL_WIDTH = 48;
@@ -46,7 +48,7 @@ export default function CalendarView({ bookings = [], blockedDates = {}, onToggl
     };
 
     const isRoomBlocked = (roomName, dateStr) => {
-        return blockedDates[roomName] && blockedDates[roomName].includes(dateStr);
+        return blockedDates[roomName] && blockedDates[roomName][dateStr];
     };
 
     const handleDateClick = (day, roomName) => {
@@ -153,7 +155,8 @@ export default function CalendarView({ bookings = [], blockedDates = {}, onToggl
                 }}>
                     {Array.from({ length: daysInMonth }).map((_, i) => {
                         const dateStr = formatDateString(year, month, i + 1);
-                        const blocked = isRoomBlocked(apt.name, dateStr);
+                        const blockedData = isRoomBlocked(apt.name, dateStr);
+                        const blocked = !!blockedData;
                         const past = isPastDate(year, month, i + 1);
                         const isWeekend = new Date(year, month, i + 1).getDay() === 0 || new Date(year, month, i + 1).getDay() === 6;
                         const isToday = new Date().toDateString() === new Date(year, month, i + 1).toDateString();
@@ -175,7 +178,7 @@ export default function CalendarView({ bookings = [], blockedDates = {}, onToggl
                                     cursor: past ? 'not-allowed' : 'pointer',
                                     position: 'relative'
                                 }}
-                                title={blocked ? `${apt.name} - Unavailable. Click to make available` : (past ? 'Past date' : `${apt.name} - Available. Click to block`)}
+                                title={blocked ? `${apt.name} - Blocked by ${blockedData.blockedBy}. Click to unblock.` : (past ? 'Past date' : `${apt.name} - Available. Click to block`)}
                             >
                                 {blocked && (
                                     <Lock size={10} style={{ position: 'absolute', top: '3px', right: '3px', color: '#ef4444', opacity: 0.6 }} />
@@ -487,7 +490,7 @@ export default function CalendarView({ bookings = [], blockedDates = {}, onToggl
                             Rooms
                         </div>
                         {displayedRooms.map(apt => {
-                            const roomBlockedCount = blockedDates[apt.name] ? blockedDates[apt.name].length : 0;
+                            const roomBlockedCount = blockedDates[apt.name] ? Object.keys(blockedDates[apt.name]).length : 0;
                             return (
                                 <div key={apt.id} style={{
                                     height: '56px',
