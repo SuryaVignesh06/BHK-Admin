@@ -13,7 +13,7 @@ export default function AdminLogin() {
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         setError('');
 
         if (!email || !password) {
@@ -40,6 +40,16 @@ export default function AdminLogin() {
             setError('Invalid credentials');
         }
 
+        setLoading(false);
+    };
+
+    const handleDemoLogin = async () => {
+        setEmail('admin@voho.in');
+        setPassword('admin123');
+        setLoading(true);
+        await new Promise(resolve => setTimeout(resolve, 800));
+        localStorage.setItem('currentUser', JSON.stringify({ email: 'admin@voho.in' }));
+        navigate('/dashboard');
         setLoading(false);
     };
 
@@ -247,6 +257,32 @@ export default function AdminLogin() {
                         ) : (
                             'Sign In'
                         )}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleDemoLogin}
+                        disabled={loading}
+                        style={{
+                            width: '100%',
+                            marginTop: '12px',
+                            padding: '14px',
+                            background: 'transparent',
+                            border: '1px solid #1F3D2A',
+                            borderRadius: '12px',
+                            color: '#1F3D2A',
+                            fontSize: '15px',
+                            fontWeight: 600,
+                            cursor: loading ? 'not-allowed' : 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.2s ease',
+                        }}
+                        onMouseEnter={(e) => !loading && (e.currentTarget.style.background = 'rgba(31, 61, 42, 0.05)')}
+                        onMouseLeave={(e) => !loading && (e.currentTarget.style.background = 'transparent')}
+                    >
+                        Demo Login
                     </button>
 
                     {/* Demo credentials */}
